@@ -1,4 +1,5 @@
 $(function () {
+    "use strict";
     var App = {
         init:function () {
 
@@ -10,7 +11,7 @@ $(function () {
                 { Name:"The Inheritance", ReleaseYear:"1976" }
             ];
 
-            this.markup = "<li><b>${Name}</b> (${ReleaseYear})</li>";
+            this.markup = "<li class='list-item'>${Name} (${ReleaseYear})</li>";
 
             $.template("movieTemplate", this.markup);
 
