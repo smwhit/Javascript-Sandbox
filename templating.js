@@ -1,31 +1,36 @@
-$(function() {
-  
-    var movies = [
-          { Name: "The Red Violin", ReleaseYear: "1998" },
-          { Name: "Eyes Wide Shut", ReleaseYear: "1999" },
-          { Name: "The Inheritance", ReleaseYear: "1976" }
-      ];
+$(function () {
+    var App = {
+        init:function () {
 
-          var markup = "<li><b>${Name}</b> (${ReleaseYear})</li>";
+            var that = this;
 
-          // Compile the markup as a named template
-          $.template( "movieTemplate", markup );
+            this.movies = [
+                { Name:"The Red Violin", ReleaseYear:"1998" },
+                { Name:"Eyes Wide Shut", ReleaseYear:"1999" },
+                { Name:"The Inheritance", ReleaseYear:"1976" }
+            ];
 
-          // Render the template with the movies data and insert
-          // the rendered HTML under the "movieList" element
-          render();
+            this.markup = "<li><b>${Name}</b> (${ReleaseYear})</li>";
 
-          function render() {
-              $.tmpl( "movieTemplate", movies ).appendTo( "#movieList" );
-          }
+            $.template("movieTemplate", this.markup);
 
-        $("#AddMovie").click(function() {
-            var newMovie =  $("#newMovie").val();
-            var releaseDate = $("#releaseDate").val();
-            $("#movieList").empty();
-            movies.push({ Name: newMovie, ReleaseYear: releaseDate });
-            $("#newMovie").val("");
-            $("#releaseDate").val("");
-            render();
-        });
+            $("#AddMovie").click(function () {
+                                this.newMovie = $("#newMovie").val();
+                                this.releaseDate = $("#releaseDate").val();
+                                $("#movieList").empty();
+                                that.movies.push({ Name:this.newMovie, ReleaseYear:this.releaseDate });
+                                $("#newMovie").val("");
+                                $("#releaseDate").val("");
+                                that.render();
+                            }
+                        );
+            this.render();
+        },
+
+        render:function () {
+            $.tmpl("movieTemplate", this.movies).appendTo("#movieList");
+        }
+    };
+
+    window.MovieApp = App.init();
 });
