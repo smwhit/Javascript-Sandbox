@@ -29,7 +29,8 @@ $(function () {
         },
 
         render:function () {
-            $.tmpl("movieTemplate", this.movies).appendTo("#movieList");
+            $.tmpl("movieTemplate", this.movies).appendTo($("#movieList"));
+
         }
     };
 
